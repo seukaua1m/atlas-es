@@ -1,0 +1,3324 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#7b1717">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="Atlas de las Escrituras: 150 páginas con mapas, resúmenes y líneas del tiempo para entender la Biblia con mayor claridad.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%276%27 fill=%27%238f1f22%27/%3E%3Cpath d=%27M6 8h8l2 2 2-2h8v17h-8l-2 2-2-2H6zM16 10v17%27 fill=%27none%27 stroke=%27%23e6c77e%27 stroke-width=%272%27/%3E%3C/svg%3E"><title>Atlas de las Escrituras: 150 páginas para entender la Biblia</title>
+
+  <style>
+    :root {
+      --paper: #f6f0e3;
+      --paper-strong: #efe4cf;
+      --surface: #fffdf8;
+      --ink: #1c2b36;
+      --ink-soft: #52616b;
+      --navy: #173449;
+      --navy-deep: #102737;
+      --red: #8f1f22;
+      --red-dark: #6f1518;
+      --gold: #b8872f;
+      --gold-light: #e6c77e;
+      --olive: #526b4d;
+      --line: rgba(28, 43, 54, .14);
+      --shadow: 0 20px 55px rgba(20, 35, 45, .13);
+      --shadow-soft: 0 10px 28px rgba(20, 35, 45, .09);
+      --radius: 22px;
+      --radius-sm: 14px;
+      --max: 1160px;
+      --fixed-bar-height: 68px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: calc(var(--fixed-bar-height) + 18px);
+    }
+
+    body {
+      margin: 0;
+      min-width: 320px;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 20% 0%, rgba(184, 135, 47, .10), transparent 27rem),
+        linear-gradient(180deg, #fbf7ee 0%, var(--paper) 42%, #f8f3e8 100%);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      padding-top: var(--fixed-bar-height);
+    }
+
+    body.modal-open { overflow: hidden; }
+
+    a { color: inherit; }
+
+    button, a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    button, input, textarea, select {
+      font: inherit;
+    }
+
+    img, svg {
+      display: block;
+      max-width: 100%;
+    }
+
+    svg[aria-hidden="true"] {
+      pointer-events: none;
+    }
+
+    .sr-only {
+      position: absolute !important;
+      width: 1px !important;
+      height: 1px !important;
+      padding: 0 !important;
+      margin: -1px !important;
+      overflow: hidden !important;
+      clip: rect(0, 0, 0, 0) !important;
+      white-space: nowrap !important;
+      border: 0 !important;
+    }
+
+    .container {
+      width: min(calc(100% - 32px), var(--max));
+      margin-inline: auto;
+    }
+
+    .section {
+      padding: 88px 0;
+      position: relative;
+    }
+
+    .section--compact {
+      padding: 64px 0;
+    }
+
+    .section--dark {
+      color: #fffaf0;
+      background:
+        linear-gradient(140deg, rgba(184, 135, 47, .10), transparent 45%),
+        var(--navy-deep);
+    }
+
+    .section--red {
+      color: #fffaf0;
+      background:
+        radial-gradient(circle at 80% 10%, rgba(230, 199, 126, .18), transparent 24rem),
+        linear-gradient(135deg, var(--red-dark), var(--red));
+    }
+
+    .title-with-icon {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .title-with-icon > svg {
+      width: clamp(30px, 4vw, 46px);
+      height: clamp(30px, 4vw, 46px);
+      flex: 0 0 auto;
+      color: var(--gold-light);
+    }
+
+    .section-rule {
+      width: 66px;
+      height: 3px;
+      margin: 18px 0 0;
+      border: 0;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light));
+      border-radius: 999px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 14px;
+      color: var(--red);
+      font-size: .84rem;
+      font-weight: 800;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    h1, h2, h3 {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      line-height: 1.12;
+      letter-spacing: -.025em;
+      text-wrap: balance;
+    }
+
+    h1 {
+      max-width: 870px;
+      font-size: clamp(2.45rem, 5.1vw, 4.65rem);
+      color: var(--navy-deep);
+    }
+
+    .hero h1 {
+      width: min(100%, 870px);
+    }
+
+    h2 {
+      font-size: clamp(2rem, 4.2vw, 3.55rem);
+      color: var(--navy-deep);
+    }
+
+    h3 {
+      font-size: clamp(1.35rem, 2.2vw, 1.85rem);
+      color: var(--navy-deep);
+    }
+
+    .section--dark h2,
+    .section--dark h3,
+    .section--red h2,
+    .section--red h3 {
+      color: #fffaf0;
+    }
+
+    p {
+      margin: 0;
+    }
+
+    .lead {
+      max-width: 800px;
+      margin-top: 20px;
+      color: var(--ink-soft);
+      font-size: clamp(1.05rem, 1.7vw, 1.24rem);
+    }
+
+    .section--dark .lead,
+    .section--red .lead {
+      color: rgba(255, 250, 240, .82);
+    }
+
+    .fixed-offer {
+      position: fixed;
+      z-index: 1000;
+      inset: 0 0 auto;
+      min-height: var(--fixed-bar-height);
+      color: #fff;
+      background: var(--red);
+      box-shadow: 0 8px 24px rgba(60, 8, 10, .22);
+    }
+
+    .fixed-offer__inner {
+      min-height: var(--fixed-bar-height);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      text-align: center;
+    }
+
+    .fixed-offer strong {
+      font-size: clamp(.92rem, 2vw, 1.05rem);
+    }
+
+    .fixed-offer .button {
+      min-height: 42px;
+      padding: 10px 18px;
+      color: var(--red-dark);
+      background: #fffaf0;
+      box-shadow: none;
+      white-space: nowrap;
+    }
+
+    .fixed-offer .button:hover {
+      background: var(--gold-light);
+      transform: translateY(-1px);
+    }
+
+    .button {
+      display: inline-flex;
+      min-height: 54px;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 24px;
+      border: 0;
+      border-radius: 999px;
+      color: #fff;
+      background: linear-gradient(135deg, var(--red), var(--red-dark));
+      box-shadow: 0 12px 24px rgba(111, 21, 24, .20);
+      font-weight: 800;
+      line-height: 1.2;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 30px rgba(111, 21, 24, .24);
+    }
+
+    .button:focus-visible,
+    .carousel-control:focus-visible,
+    .carousel-dot:focus-visible,
+    .modal-close:focus-visible,
+    summary:focus-visible,
+    .text-link:focus-visible {
+      outline: 3px solid var(--gold-light);
+      outline-offset: 4px;
+    }
+
+    .button--gold {
+      color: var(--navy-deep);
+      background: linear-gradient(135deg, var(--gold-light), var(--gold));
+      box-shadow: 0 12px 24px rgba(184, 135, 47, .20);
+    }
+
+    .button--wide {
+      width: 100%;
+    }
+
+    .button svg {
+      width: 20px;
+      height: 20px;
+      flex: 0 0 auto;
+    }
+
+    .hero {
+      overflow: hidden;
+      padding: clamp(42px, 5vw, 64px) 0 76px;
+    }
+
+    .hero .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .hero::before,
+    .hero::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(2px);
+      pointer-events: none;
+    }
+
+    .hero::before {
+      width: 370px;
+      height: 370px;
+      right: -160px;
+      top: 70px;
+      border: 1px solid rgba(184, 135, 47, .20);
+      box-shadow:
+        0 0 0 38px rgba(184, 135, 47, .055),
+        0 0 0 76px rgba(184, 135, 47, .035);
+    }
+
+    .hero::after {
+      width: 180px;
+      height: 180px;
+      left: -90px;
+      bottom: 20px;
+      background: rgba(143, 31, 34, .05);
+    }
+
+    .hero-subtitle {
+      max-width: 760px;
+      margin: 12px auto 0;
+      color: var(--red);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.25rem, 2.15vw, 1.78rem);
+      font-weight: 700;
+      line-height: 1.3;
+    }
+
+    .hero-copy {
+      max-width: 760px;
+      margin: 12px auto 0;
+      color: var(--ink-soft);
+      font-size: clamp(1.04rem, 1.8vw, 1.22rem);
+    }
+
+    .hero-grid {
+      display: grid;
+      width: 100%;
+      max-width: 720px;
+      grid-template-columns: minmax(0, 1fr);
+      gap: clamp(28px, 4vw, 42px);
+      align-items: start;
+      justify-items: center;
+      margin: 20px auto 0;
+    }
+
+    .hero-offer {
+      width: min(100%, 620px);
+      align-self: center;
+      justify-self: center;
+      display: grid;
+      align-content: center;
+      justify-items: center;
+      padding: clamp(28px, 5vw, 48px);
+      border: 1px solid rgba(184, 135, 47, .25);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(145deg, rgba(255,255,255,.88), rgba(255,253,248,.66)),
+        var(--surface);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-offer::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto;
+      height: 5px;
+      background: linear-gradient(90deg, var(--red), var(--gold), var(--navy));
+    }
+
+    .offer-kicker {
+      color: var(--ink-soft);
+      font-size: .96rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .09em;
+    }
+
+    .hero-price {
+      margin-top: 4px;
+      color: var(--red);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(4.2rem, 9vw, 7.2rem);
+      font-weight: 800;
+      line-height: .95;
+      letter-spacing: -.06em;
+    }
+
+    .hero-payment {
+      margin-top: 12px;
+      color: var(--ink-soft);
+      font-weight: 700;
+    }
+
+    .hero-offer .button {
+      margin-top: 26px;
+    }
+
+    .trust-mini {
+      display: grid;
+      width: min(100%, 360px);
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .trust-mini span {
+      display: grid;
+      place-items: center;
+      min-height: 48px;
+      padding: 8px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      color: var(--ink-soft);
+    }
+
+    .trust-mini svg {
+      width: 21px;
+      height: 21px;
+    }
+
+    .carousel {
+      position: relative;
+      min-width: 0;
+      width: 100%;
+      max-width: clamp(280px, 32vw, 390px);
+      margin-inline: auto;
+    }
+
+    .carousel-viewport {
+      overflow: visible;
+      border-radius: 0;
+      box-shadow: none;
+      background: transparent;
+    }
+
+    .carousel-track {
+      position: relative;
+      display: block;
+      aspect-ratio: 210 / 297;
+      perspective: 1500px;
+      transform: none !important;
+      transition: none;
+      will-change: auto;
+    }
+
+    .carousel-slide {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      min-width: 0;
+      overflow: visible;
+      border-radius: 0 8px 8px 0;
+      background: transparent;
+      transform-origin: left center;
+      transform-style: preserve-3d;
+      backface-visibility: hidden;
+      transition: transform .8s cubic-bezier(.645, .045, .355, 1);
+      will-change: transform;
+    }
+
+    .carousel-slide img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 1px solid #e2e8f0;
+      border-radius: 0 8px 8px 0;
+      background: #fff;
+      box-shadow: 0 14px 40px rgba(18, 61, 50, .18), inset 12px 0 22px -13px rgba(0,0,0,.24);
+      backface-visibility: hidden;
+      object-fit: fill;
+    }
+
+    .carousel-slide::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 0 8px 8px 0;
+      background: linear-gradient(to right, rgba(0,0,0,.15) 0%, rgba(255,255,255,.08) 10%, transparent 23%);
+      pointer-events: none;
+      backface-visibility: hidden;
+    }
+
+    .carousel-caption {
+      display: none;
+    }
+
+    .carousel-controls {
+      position: absolute;
+      z-index: 80;
+      top: 50%;
+      right: -22px;
+      left: -22px;
+      height: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      margin-top: 0;
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+
+    .carousel-control {
+      position: relative;
+      z-index: 81;
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      padding: 0;
+      border: 2px solid var(--navy);
+      border-radius: 50%;
+      color: var(--navy);
+      background: rgba(255, 253, 248, .94);
+      cursor: pointer;
+      box-shadow: 0 10px 24px rgba(18, 61, 50, .15);
+      pointer-events: auto;
+      transition: background .2s, color .2s, transform .2s;
+    }
+
+    .carousel-control:hover {
+      color: #fff;
+      background: var(--navy);
+      transform: scale(1.08);
+    }
+
+    .carousel-control svg {
+      width: 23px;
+      height: 23px;
+    }
+
+    .carousel-dots {
+      display: none;
+    }
+
+    .carousel-dot {
+      width: 9px;
+      height: 9px;
+      padding: 0;
+      border: 0;
+      border-radius: 999px;
+      background: rgba(23, 52, 73, .22);
+      cursor: pointer;
+      transition: width .2s ease, background .2s ease;
+    }
+
+    .carousel-dot[aria-current="true"] {
+      width: 28px;
+      background: var(--red);
+    }
+
+    .carousel-footer {
+      display: block;
+      margin-top: 12px;
+      text-align: center;
+    }
+
+    .carousel-counter {
+      display: inline-block;
+      margin: 0;
+      padding: 5px 13px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--ink-soft);
+      background: rgba(255, 253, 248, .86);
+      font-size: .87rem;
+      font-weight: 900;
+      line-height: 1.2;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 42px;
+    }
+
+    .feature-card {
+      min-height: 100%;
+      padding: 30px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 253, 248, .78);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .icon-box {
+      width: 54px;
+      height: 54px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 22px;
+      border-radius: 16px;
+      color: var(--red);
+      background: rgba(143, 31, 34, .085);
+    }
+
+    .icon-box svg {
+      width: 28px;
+      height: 28px;
+    }
+
+    .feature-card p {
+      margin-top: 13px;
+      color: var(--ink-soft);
+    }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 860px);
+      gap: clamp(42px, 7vw, 86px);
+      align-items: start;
+      justify-content: center;
+      margin-top: 46px;
+    }
+
+    .benefit-list,
+    .product-list,
+    .audience-list,
+    .package-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .benefit-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .benefit-list li,
+    .product-list li,
+    .audience-list li,
+    .package-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .benefit-list svg,
+    .product-list svg,
+    .audience-list svg,
+    .package-list svg {
+      width: 21px;
+      height: 21px;
+      flex: 0 0 auto;
+      margin-top: 3px;
+      color: var(--gold);
+    }
+
+    .content-cta {
+      margin-top: 30px;
+    }
+
+    .product-showcase {
+      display: grid;
+      grid-template-columns: minmax(350px, .9fr) minmax(0, 1.1fr);
+      gap: clamp(38px, 6vw, 72px);
+      align-items: center;
+      margin-top: 44px;
+      padding: clamp(26px, 4vw, 46px);
+      border: 1px solid rgba(184, 135, 47, .24);
+      border-radius: calc(var(--radius) + 4px);
+      background: rgba(255, 253, 248, .82);
+      box-shadow: var(--shadow);
+    }
+
+    .mockup-4x3 {
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+      border-radius: 18px;
+      background: var(--navy-deep);
+      box-shadow: 0 18px 40px rgba(16, 39, 55, .18);
+    }
+
+    .mockup-4x3 svg,
+    .mockup-4x3 img {
+      width: 100%;
+      height: 100%;
+    }
+
+    .mockup-4x3 img {
+      object-fit: contain;
+      background: var(--navy-deep);
+    }
+
+    .product-copy p {
+      margin-top: 16px;
+      color: var(--ink-soft);
+    }
+
+    .product-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 11px 22px;
+      margin-top: 24px;
+    }
+
+    .value-line {
+      margin-top: 25px !important;
+      padding-top: 20px;
+      border-top: 1px solid var(--line);
+      color: var(--red) !important;
+      font-weight: 850;
+    }
+
+    .bonus-intro {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      max-width: 860px;
+      margin-top: 24px;
+      padding: 17px 20px;
+      border: 1px solid rgba(230, 199, 126, .28);
+      border-radius: var(--radius-sm);
+      color: #fff8e7;
+      background: rgba(255,255,255,.055);
+    }
+
+    .bonus-intro svg {
+      width: 28px;
+      height: 28px;
+      color: var(--gold-light);
+      flex: 0 0 auto;
+    }
+
+    .bonus-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 28px;
+      margin-top: 42px;
+    }
+
+    .bonus-card {
+      overflow: hidden;
+      border: 1px solid rgba(230, 199, 126, .2);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.055);
+      box-shadow: 0 18px 42px rgba(0,0,0,.14);
+    }
+
+    .bonus-card .mockup-4x3 {
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    .bonus-card__copy {
+      padding: 26px;
+    }
+
+    .bonus-card__copy p {
+      margin-top: 13px;
+      color: rgba(255, 250, 240, .78);
+    }
+
+    .bonus-card__copy .value-line {
+      color: var(--gold-light) !important;
+      border-color: rgba(255,255,255,.12);
+    }
+
+    .audience-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 900px);
+      gap: clamp(44px, 7vw, 86px);
+      align-items: start;
+      justify-content: center;
+      margin-top: 44px;
+    }
+
+    .audience-list {
+      display: grid;
+      gap: 16px;
+    }
+
+    .audience-list li {
+      padding: 16px 18px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(255, 253, 248, .76);
+    }
+
+    .audience-list svg {
+      color: var(--olive);
+    }
+
+    .testimonials {
+      margin-top: 86px;
+    }
+
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 36px;
+    }
+
+    .testimonial {
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .stars {
+      display: flex;
+      gap: 4px;
+      color: var(--gold);
+    }
+
+    .stars svg {
+      width: 19px;
+      height: 19px;
+      fill: currentColor;
+      stroke: currentColor;
+    }
+
+    .testimonial blockquote {
+      margin: 18px 0 20px;
+      color: var(--ink);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.09rem;
+      line-height: 1.65;
+    }
+
+    .testimonial cite {
+      color: var(--ink-soft);
+      font-style: normal;
+      font-weight: 800;
+    }
+
+    .offer-heading {
+      max-width: 840px;
+    }
+
+    .offer-heading .lead {
+      color: rgba(255,250,240,.78);
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.06fr) minmax(0, .94fr);
+      gap: 28px;
+      align-items: stretch;
+      margin-top: 46px;
+    }
+
+    .price-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      padding: clamp(28px, 4vw, 42px);
+      border: 1px solid rgba(255,255,255,.16);
+      border-radius: calc(var(--radius) + 2px);
+      background: rgba(255,255,255,.065);
+      box-shadow: 0 22px 54px rgba(70, 7, 10, .16);
+    }
+
+    .price-card--featured {
+      color: var(--ink);
+      background: var(--surface);
+      border-color: var(--gold-light);
+      transform: translateY(-10px);
+    }
+
+    .price-card--featured h3 {
+      color: var(--navy-deep);
+    }
+
+    .price-card__tag {
+      display: inline-flex;
+      width: fit-content;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 22px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      color: var(--red-dark);
+      background: var(--gold-light);
+      font-size: .8rem;
+      font-weight: 900;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+    }
+
+    .price-card__tag svg {
+      width: 17px;
+      height: 17px;
+    }
+
+    .price-card__subtitle {
+      margin-top: 10px;
+      color: rgba(255,250,240,.76);
+    }
+
+    .price-card--featured .price-card__subtitle,
+    .price-card--featured .price-card__payment {
+      color: var(--ink-soft);
+    }
+
+    .price-card__price {
+      margin-top: 20px;
+      color: var(--gold-light);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(3.4rem, 7vw, 5.7rem);
+      font-weight: 850;
+      line-height: .95;
+      letter-spacing: -.055em;
+    }
+
+    .price-card--featured .price-card__price {
+      color: var(--red);
+    }
+
+    .price-card__payment {
+      margin-top: 9px;
+      color: rgba(255,250,240,.75);
+      font-weight: 750;
+    }
+
+    .package-list {
+      display: grid;
+      gap: 13px;
+      margin-top: 28px;
+      margin-bottom: 30px;
+    }
+
+    .package-list svg {
+      color: var(--gold-light);
+    }
+
+    .package-list .locked {
+      opacity: .54;
+    }
+
+    .package-list .locked svg {
+      color: rgba(255,250,240,.64);
+    }
+
+    .price-card--featured .package-list svg {
+      color: var(--olive);
+    }
+
+    .price-card .button {
+      margin-top: auto;
+    }
+
+    .guarantee {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 24px;
+      align-items: center;
+      margin-top: 46px;
+      padding: clamp(26px, 4vw, 38px);
+      border: 1px solid rgba(255,255,255,.16);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.07);
+    }
+
+    .guarantee__seal {
+      width: 88px;
+      height: 88px;
+      display: grid;
+      place-items: center;
+      border: 2px solid var(--gold-light);
+      border-radius: 50%;
+      color: var(--gold-light);
+    }
+
+    .guarantee__seal svg {
+      width: 44px;
+      height: 44px;
+    }
+
+    .guarantee h3 {
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+    }
+
+    .guarantee p {
+      margin-top: 10px;
+      color: rgba(255,250,240,.78);
+    }
+
+    .faq-list {
+      display: grid;
+      gap: 14px;
+      max-width: 920px;
+      margin: 42px auto 0;
+    }
+
+    details {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      background: rgba(255,253,248,.8);
+      box-shadow: 0 8px 20px rgba(20, 35, 45, .06);
+    }
+
+    summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 20px 22px;
+      color: var(--navy-deep);
+      font-weight: 850;
+      cursor: pointer;
+      list-style: none;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    summary::after {
+      content: "+";
+      width: 28px;
+      height: 28px;
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+      border-radius: 50%;
+      color: #fff;
+      background: var(--red);
+      font-size: 1.15rem;
+      line-height: 1;
+      transition: transform .18s ease;
+    }
+
+    details[open] summary::after {
+      transform: rotate(45deg);
+    }
+
+    details p {
+      padding: 0 22px 22px;
+      color: var(--ink-soft);
+    }
+
+    footer {
+      padding: 54px 0 38px;
+      color: rgba(255,250,240,.78);
+      background: var(--navy-deep);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.35fr .65fr;
+      gap: 36px;
+      align-items: start;
+    }
+
+    footer h2 {
+      color: #fffaf0;
+      font-size: clamp(1.7rem, 3vw, 2.35rem);
+    }
+
+    footer p {
+      max-width: 670px;
+      margin-top: 13px;
+    }
+
+    .footer-nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 14px 20px;
+    }
+
+    .footer-nav a {
+      color: #fffaf0;
+      font-weight: 750;
+      text-decoration: none;
+    }
+
+    .footer-nav a:hover {
+      color: var(--gold-light);
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      margin-top: 34px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,.12);
+      font-size: .92rem;
+    }
+
+    .upgrade-modal {
+      width: min(92vw, 680px);
+      max-height: min(90vh, 760px);
+      padding: 0;
+      border: 0;
+      border-radius: 24px;
+      color: var(--ink);
+      background: var(--surface);
+      box-shadow: 0 30px 90px rgba(0,0,0,.38);
+      overflow: auto;
+    }
+
+    .upgrade-modal::backdrop {
+      background: rgba(9, 21, 30, .76);
+      -webkit-backdrop-filter: blur(5px);
+      backdrop-filter: blur(5px);
+    }
+
+    .modal-inner {
+      position: relative;
+      padding: clamp(28px, 6vw, 50px);
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .modal-inner::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto;
+      height: 6px;
+      background: linear-gradient(90deg, var(--red), var(--gold), var(--navy));
+    }
+
+    .modal-close {
+      position: absolute;
+      z-index: 2;
+      top: 16px;
+      right: 16px;
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      padding: 0;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      color: var(--ink);
+      background: #fff;
+      cursor: pointer;
+    }
+
+    .modal-close svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .modal-icon {
+      width: 68px;
+      height: 68px;
+      display: grid;
+      place-items: center;
+      margin: 8px auto 22px;
+      border-radius: 20px;
+      color: var(--red);
+      background: rgba(143,31,34,.09);
+    }
+
+    .modal-icon svg {
+      width: 34px;
+      height: 34px;
+    }
+
+    .upgrade-modal h2 {
+      font-size: clamp(1.85rem, 4.8vw, 3rem);
+    }
+
+    .upgrade-modal p {
+      margin-top: 16px;
+      color: var(--ink-soft);
+    }
+
+    .modal-price {
+      margin-top: 24px !important;
+      color: var(--red) !important;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.8rem, 5vw, 2.7rem);
+      font-weight: 850;
+      line-height: 1.15;
+    }
+
+    .coupon {
+      margin-top: 20px;
+      padding: 18px;
+      border: 2px dashed var(--gold);
+      border-radius: 16px;
+      color: var(--navy-deep);
+      background: var(--paper);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: clamp(1.5rem, 5vw, 2.3rem);
+      font-weight: 900;
+      letter-spacing: .06em;
+    }
+
+    .saving {
+      color: var(--olive) !important;
+      font-weight: 850;
+    }
+
+    .modal-actions {
+      display: grid;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .text-link {
+      display: inline-block;
+      padding: 10px;
+      border: 0;
+      color: var(--ink-soft);
+      background: transparent;
+      font-weight: 700;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      cursor: pointer;
+    }
+
+    .copy-confirmation {
+      display: none;
+      margin-top: 22px;
+      padding-top: 22px;
+      border-top: 1px solid var(--line);
+    }
+
+    .copy-confirmation.is-visible {
+      display: block;
+    }
+
+    .copy-confirmation strong {
+      display: block;
+      color: var(--olive);
+      font-size: 1.16rem;
+    }
+
+    .copy-confirmation .button {
+      margin-top: 18px;
+    }
+
+    .toast {
+      position: fixed;
+      z-index: 1200;
+      left: 50%;
+      bottom: 28px;
+      transform: translate(-50%, 20px);
+      max-width: calc(100% - 32px);
+      padding: 13px 18px;
+      border-radius: 999px;
+      color: #fff;
+      background: var(--navy-deep);
+      box-shadow: var(--shadow);
+      font-weight: 800;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .2s ease, transform .2s ease;
+    }
+
+    .toast.is-visible {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
+    @media (max-width: 920px) {
+      :root { --fixed-bar-height: 72px; }
+
+      .section { padding: 72px 0; }
+
+      .hero {
+        padding-top: 72px;
+      }
+
+      .hero-grid,
+      .content-grid,
+      .product-showcase,
+      .audience-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-grid {
+        max-width: 720px;
+      }
+
+      .carousel-slide {
+        aspect-ratio: 4 / 4.7;
+      }
+
+      .feature-grid,
+      .testimonial-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .bonus-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .pricing-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .price-card--featured {
+        transform: none;
+      }
+
+      .product-list {
+        grid-template-columns: 1fr;
+      }
+
+      .guarantee {
+        grid-template-columns: auto 1fr;
+      }
+
+      .guarantee .button {
+        grid-column: 1 / -1;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-nav {
+        justify-content: flex-start;
+      }
+    }
+
+    @media (max-width: 620px) {
+      :root { --fixed-bar-height: 86px; }
+
+      body {
+        padding-top: var(--fixed-bar-height);
+      }
+
+      .container {
+        width: min(calc(100% - 24px), var(--max));
+      }
+
+      .fixed-offer__inner {
+        min-height: var(--fixed-bar-height);
+        gap: 10px;
+      }
+
+      .fixed-offer strong {
+        max-width: 170px;
+        line-height: 1.2;
+        text-align: left;
+      }
+
+      .fixed-offer .button {
+        min-height: 40px;
+        padding-inline: 14px;
+        font-size: .88rem;
+      }
+
+      .hero {
+        padding-top: 58px;
+      }
+
+      .hero-grid {
+        margin-top: 34px;
+      }
+
+      .hero-offer {
+        padding: 26px 22px;
+      }
+
+      .trust-mini {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .feature-card,
+      .testimonial,
+      .price-card {
+        padding: 24px;
+      }
+
+      .product-showcase {
+        padding: 18px;
+      }
+
+      .mockup-4x3 {
+        border-radius: 14px;
+      }
+
+      .guarantee {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .guarantee__seal {
+        margin-inline: auto;
+      }
+
+      .guarantee .button {
+        grid-column: auto;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+      }
+    }
+
+    @media print {
+      .fixed-offer,
+      .carousel-controls,
+      .button,
+      .upgrade-modal,
+      .toast {
+        display: none !important;
+      }
+
+      body {
+        padding-top: 0;
+        background: #fff;
+      }
+
+      .section {
+        padding: 36px 0;
+      }
+    }
+  </style>
+
+
+  <script>document.documentElement.classList.add("js");</script>
+  <style id="dopamine-enhancements">
+    /* Recompensas visuais e microinterações — sem alterar a identidade da página. */
+
+    .page-progress {
+      position: fixed;
+      z-index: 1001;
+      top: var(--fixed-bar-height);
+      right: 0;
+      left: 0;
+      height: 4px;
+      overflow: hidden;
+      background: rgba(255, 253, 248, .34);
+      pointer-events: none;
+    }
+
+    .page-progress__bar {
+      display: block;
+      width: 20%;
+      height: 100%;
+      background: var(--gold-light);
+      transform-origin: left center;
+      transition: width .12s linear;
+    }
+
+    .fixed-offer strong {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .fixed-offer strong::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      flex: 0 0 auto;
+      border-radius: 50%;
+      background: var(--gold-light);
+      box-shadow: 0 0 0 0 rgba(230, 199, 126, .62);
+      animation: fixedOfferPulse 2.2s ease-out infinite;
+    }
+
+    @keyframes fixedOfferPulse {
+      0%, 38%, 100% { box-shadow: 0 0 0 0 rgba(230, 199, 126, .56); }
+      68% { box-shadow: 0 0 0 7px rgba(230, 199, 126, 0); }
+    }
+
+    .js .dopamine-reveal {
+      opacity: 0;
+      filter: blur(2px);
+      transform: translateY(15px) scale(.985);
+      transition:
+        opacity .42s ease var(--reveal-delay, 0ms),
+        transform .42s ease var(--reveal-delay, 0ms),
+        filter .42s ease var(--reveal-delay, 0ms);
+    }
+
+    .js .dopamine-reveal.is-visible {
+      opacity: 1;
+      filter: blur(0);
+      transform: translateY(0) scale(1);
+    }
+
+    .carousel-viewport {
+      position: relative;
+      isolation: isolate;
+    }
+
+    .carousel-track {
+      position: relative;
+      display: block;
+      aspect-ratio: 210 / 297;
+      perspective: 1500px;
+      transform: none !important;
+      transition: none;
+      will-change: auto;
+    }
+
+    .carousel-slide {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      min-width: 0;
+      aspect-ratio: auto;
+      transform-origin: left center;
+      transform-style: preserve-3d;
+      backface-visibility: hidden;
+      transition: transform .8s cubic-bezier(.645, .045, .355, 1);
+      will-change: transform;
+    }
+
+    .carousel-slide.is-flipped {
+      transform: rotateY(-180deg);
+      pointer-events: none;
+    }
+
+    .carousel-track.is-resetting .carousel-slide {
+      transition: none !important;
+    }
+
+    .carousel-slide > svg,
+    .carousel-slide > img,
+    .carousel-caption {
+      backface-visibility: hidden;
+    }
+
+    .carousel-controls {
+      position: absolute;
+      z-index: 80;
+      top: 50%;
+      right: -22px;
+      left: -22px;
+      height: 0;
+      margin-top: 0;
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+
+    .carousel-control {
+      position: relative;
+      z-index: 81;
+      border-color: var(--navy);
+      background: rgba(255, 253, 248, .94);
+      pointer-events: auto;
+    }
+
+    .carousel-footer {
+      display: block;
+      margin-top: 12px;
+      text-align: center;
+    }
+
+    .carousel-footer .carousel-dots {
+      flex: none;
+      min-height: 14px;
+    }
+
+    .carousel-counter {
+      display: inline-block;
+      margin: 0;
+      padding: 5px 13px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--ink-soft);
+      background: rgba(255, 253, 248, .86);
+      font-size: .87rem;
+      font-weight: 900;
+      line-height: 1.2;
+      text-align: center;
+    }
+
+    .hero-offer {
+      width: min(100%, 620px);
+      align-self: center;
+      align-content: start;
+      justify-items: center;
+    }
+
+    .hero-badges {
+      display: grid;
+      width: 100%;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .hero-badge {
+      min-width: 0;
+      min-height: 56px;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      color: var(--ink-soft);
+      background: #fff;
+      box-shadow: 0 7px 18px rgba(20, 35, 45, .075);
+      font-size: .84rem;
+      font-weight: 800;
+      line-height: 1.25;
+    }
+
+    .hero-badge svg {
+      width: 20px;
+      height: 20px;
+      flex: 0 0 auto;
+      color: var(--red);
+    }
+
+    .button.dopamine-button {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+    }
+
+    .button.dopamine-button::after {
+      content: "";
+      position: absolute;
+      z-index: 1;
+      top: -60%;
+      bottom: -60%;
+      left: -48%;
+      width: 26%;
+      pointer-events: none;
+      background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0),
+        rgba(255, 255, 255, .48),
+        rgba(255, 255, 255, 0)
+      );
+      transform: translateX(-260%) skewX(-22deg);
+      animation: buttonShine 3.5s ease-in-out infinite;
+      animation-play-state: paused;
+    }
+
+    .button.dopamine-button.is-shine-active::after {
+      animation-play-state: running;
+    }
+
+    .button.dopamine-button.is-button-rewarded {
+      animation: buttonReward .82s ease-out 2;
+    }
+
+    @keyframes buttonShine {
+      0%, 64% { transform: translateX(-260%) skewX(-22deg); }
+      84%, 100% { transform: translateX(690%) skewX(-22deg); }
+    }
+
+    @keyframes buttonReward {
+      0% { transform: scale(.985); }
+      44% { transform: scale(1.035); }
+      100% { transform: scale(1); }
+    }
+
+    .feature-card,
+    .bonus-card,
+    .testimonial,
+    .price-card,
+    .audience-list li,
+    .faq-item {
+      transition:
+        transform .22s ease,
+        box-shadow .22s ease,
+        border-color .22s ease;
+    }
+
+    @media (hover: hover) {
+      .feature-card:hover,
+      .testimonial:hover,
+      .audience-list li:hover,
+      .faq-item:hover {
+        border-color: rgba(184, 135, 47, .42);
+        box-shadow: 0 16px 34px rgba(20, 35, 45, .13);
+        transform: translateY(-4px);
+      }
+
+      .bonus-card:hover {
+        border-color: rgba(230, 199, 126, .42);
+        box-shadow: 0 24px 52px rgba(0, 0, 0, .19);
+        transform: translateY(-4px);
+      }
+
+      .price-card:hover {
+        border-color: rgba(230, 199, 126, .48);
+        box-shadow: 0 28px 64px rgba(70, 7, 10, .22);
+        transform: translateY(-4px);
+      }
+
+      .price-card--featured:hover {
+        transform: translateY(-14px);
+      }
+    }
+
+    .bonus-card-lock {
+      position: relative;
+    }
+
+    .bonus-unlock {
+      --lock-size: 44px;
+      --lock-closed-color: var(--red);
+      --lock-open-color: #22c55e;
+
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      z-index: 10;
+      display: grid;
+      width: var(--lock-size);
+      height: var(--lock-size);
+      place-items: center;
+      overflow: visible;
+      border: 1px solid rgba(28, 43, 54, .08);
+      border-radius: 50%;
+      background: var(--surface);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, .13);
+      pointer-events: none;
+    }
+
+    .bonus-unlock__ring {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+      transform-origin: 50% 50%;
+    }
+
+    .bonus-unlock__progress {
+      fill: transparent;
+      stroke: var(--lock-open-color);
+      stroke-width: 3;
+      stroke-linecap: round;
+      transition: stroke-dashoffset 100ms linear;
+    }
+
+    .bonus-unlock__icon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 20px;
+      height: 20px;
+      transform: translate(-50%, -50%);
+      transition: opacity 300ms ease;
+    }
+
+    .bonus-unlock__icon svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .bonus-unlock__closed {
+      color: var(--lock-closed-color);
+      opacity: 1;
+    }
+
+    .bonus-unlock__opened {
+      color: var(--lock-open-color);
+      opacity: 0;
+    }
+
+    .bonus-unlock.is-unlocked .bonus-unlock__closed {
+      opacity: 0;
+    }
+
+    .bonus-unlock.is-unlocked .bonus-unlock__opened {
+      opacity: 1;
+    }
+
+    @keyframes bonusLockPop {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+
+    .bonus-unlock.is-unlocked {
+      border-color: rgba(34, 197, 94, .45);
+      background: #ecfdf5;
+      box-shadow: 0 8px 18px rgba(34, 197, 94, .28);
+      animation: bonusLockPop 1.08s ease-out;
+    }
+
+    .js .testimonial .stars svg {
+      opacity: 0;
+      transform: translateY(6px) scale(.72) rotate(-10deg);
+    }
+
+    .js .testimonial.is-stars-visible .stars svg {
+      animation: testimonialStar .42s cubic-bezier(.2, .8, .25, 1.2) both;
+    }
+
+    .js .testimonial.is-stars-visible .stars svg:nth-child(1) { animation-delay: 0ms; }
+    .js .testimonial.is-stars-visible .stars svg:nth-child(2) { animation-delay: 70ms; }
+    .js .testimonial.is-stars-visible .stars svg:nth-child(3) { animation-delay: 140ms; }
+    .js .testimonial.is-stars-visible .stars svg:nth-child(4) { animation-delay: 210ms; }
+    .js .testimonial.is-stars-visible .stars svg:nth-child(5) { animation-delay: 280ms; }
+
+    @keyframes testimonialStar {
+      0% {
+        opacity: 0;
+        transform: translateY(6px) scale(.72) rotate(-10deg);
+      }
+      68% {
+        opacity: 1;
+        transform: translateY(0) scale(1.18) rotate(0);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1) rotate(0);
+      }
+    }
+
+    .price-card--featured {
+      overflow: hidden;
+      border-width: 2px;
+      border-color: var(--gold-light);
+      box-shadow: 0 28px 72px rgba(70, 7, 10, .24);
+    }
+
+    .price-card--featured::before {
+      content: "";
+      position: absolute;
+      z-index: 1;
+      inset: 0 0 auto;
+      height: 5px;
+      background: linear-gradient(90deg, var(--red), var(--gold), var(--navy));
+      pointer-events: none;
+    }
+
+    .faq-item {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      background: var(--surface);
+      box-shadow: 0 8px 20px rgba(20, 35, 45, .06);
+    }
+
+    .faq-question {
+      width: 100%;
+      min-height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 20px 22px;
+      border: 0;
+      color: var(--navy-deep);
+      background: transparent;
+      font: inherit;
+      font-weight: 850;
+      line-height: 1.4;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .faq-question::after {
+      content: "+";
+      width: 28px;
+      height: 28px;
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+      border-radius: 50%;
+      color: #fff;
+      background: var(--red);
+      font-size: 1.15rem;
+      line-height: 1;
+      transition: transform .24s ease;
+    }
+
+    .faq-question[aria-expanded="true"]::after {
+      transform: rotate(45deg);
+    }
+
+    .faq-question:focus-visible {
+      outline: 3px solid var(--gold-light);
+      outline-offset: -4px;
+    }
+
+    .faq-answer p {
+      margin: 0;
+      padding: 0 22px 22px;
+      color: var(--ink-soft);
+    }
+
+    .js .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      padding: 0 22px;
+      opacity: 0;
+      transition:
+        max-height .34s ease,
+        padding-bottom .34s ease,
+        opacity .24s ease;
+    }
+
+    .js .faq-answer p {
+      padding: 0;
+    }
+
+    .js .faq-item.is-open .faq-answer {
+      padding-bottom: 22px;
+      opacity: 1;
+    }
+
+    .upgrade-modal--confirmation .modal-inner {
+      padding-top: clamp(34px, 7vw, 58px);
+    }
+
+    @media (max-width: 920px) {
+      .carousel-track {
+        aspect-ratio: 210 / 297;
+      }
+
+      .price-card--featured:hover {
+        transform: translateY(-4px);
+      }
+    }
+
+    @media (max-width: 620px) {
+      .carousel {
+        max-width: min(76vw, 320px);
+      }
+
+      .carousel-controls {
+        right: -20px;
+        left: -20px;
+      }
+
+      .carousel-control {
+        width: 42px;
+        height: 42px;
+      }
+
+      .hero-badge {
+        min-height: 58px;
+        padding: 9px 10px;
+        font-size: .78rem;
+      }
+
+      main .button {
+        width: 100%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .page-progress__bar,
+      .carousel-slide,
+      .faq-answer,
+      .faq-question::after,
+      .bonus-unlock,
+      .bonus-unlock__icon,
+      .bonus-unlock__progress {
+        transition: none !important;
+      }
+
+      .fixed-offer strong::before,
+      .button.dopamine-button,
+      .button.dopamine-button::after,
+      .bonus-unlock,
+      .js .testimonial.is-stars-visible .stars svg {
+        animation: none !important;
+      }
+
+      .button.dopamine-button::after {
+        display: none;
+      }
+
+      .js .dopamine-reveal {
+        opacity: 1 !important;
+        filter: none !important;
+        transform: none !important;
+      }
+
+      .js .testimonial .stars svg {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+
+      .feature-card:hover,
+      .bonus-card:hover,
+      .testimonial:hover,
+      .price-card:hover,
+      .audience-list li:hover,
+      .faq-item:hover {
+        transform: none !important;
+      }
+    }
+
+    @media print {
+      .page-progress {
+        display: none !important;
+      }
+
+      .dopamine-reveal {
+        opacity: 1 !important;
+        filter: none !important;
+        transform: none !important;
+      }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Atlas de las Escrituras — Mapa Didáctico de la Biblia",
+    "description": "150 páginas visuales organizadas para comprender la Biblia, repasar contenidos y preparar estudios con mayor rapidez.",
+    "brand": {
+      "@type": "Brand",
+      "name": "Atlas de las Escrituras"
+    },
+    "offers": [
+      {
+        "@type": "Offer",
+        "priceCurrency": "USD",
+        "price": "3.90",
+        "availability": "https://schema.org/InStock"
+      },
+      {
+        "@type": "Offer",
+        "name": "Paquete Completo",
+        "priceCurrency": "USD",
+        "price": "13.90",
+        "availability": "https://schema.org/InStock"
+      }
+    ]
+  }
+  </script>
+<!--LOWZINGO_STATIC_HEAD_START-->
+
+<!--LOWZINGO_STATIC_HEAD_END-->
+</head>
+<body>
+  <svg class="sr-only" aria-hidden="true" width="0" height="0">
+    <symbol id="i-arrow-left" viewBox="0 0 24 24">
+      <path d="M15 18 9 12l6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="i-arrow-right" viewBox="0 0 24 24">
+      <path d="m9 18 6-6-6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="i-map" viewBox="0 0 24 24">
+      <path d="m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3V6Z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/>
+      <path d="M9 3v15M15 6v15" fill="none" stroke="currentColor" stroke-width="1.9"/>
+    </symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.9"/>
+      <path d="M12 7v5l3 2" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="i-family" viewBox="0 0 24 24">
+      <circle cx="12" cy="6.5" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+      <circle cx="5.5" cy="9" r="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+      <circle cx="18.5" cy="9" r="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 20v-4.3A4 4 0 0 1 12 12h0a4 4 0 0 1 4 3.7V20M2.5 20v-3.2a3 3 0 0 1 3-2.8h1M21.5 20v-3.2a3 3 0 0 0-3-2.8h-1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="i-check" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.9"/>
+      <path d="m8 12 2.7 2.7L16.5 9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24">
+      <rect x="5" y="10" width="14" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="1.9"/>
+      <path d="M8 10V7a4 4 0 0 1 8 0v3" fill="none" stroke="currentColor" stroke-width="1.9"/>
+    </symbol>
+    <symbol id="i-gift" viewBox="0 0 24 24">
+      <path d="M4 10h16v10H4zM3 7h18v3H3zM12 7v13" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/>
+      <path d="M12 7H8.5A2.5 2.5 0 1 1 11 4.5L12 7Zm0 0h3.5A2.5 2.5 0 1 0 13 4.5L12 7Z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24">
+      <path d="M12 3 5 6v5c0 4.5 2.9 8.1 7 10 4.1-1.9 7-5.5 7-10V6l-7-3Z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/>
+      <path d="m9 12 2 2 4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="i-book" viewBox="0 0 24 24">
+      <path d="M4 4.5h6A2 2 0 0 1 12 6v14a3 3 0 0 0-3-3H4V4.5Zm16 0h-6A2 2 0 0 0 12 6v14a3 3 0 0 1 3-3h5V4.5Z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="i-download" viewBox="0 0 24 24">
+      <path d="M12 3v12m0 0 4-4m-4 4-4-4M5 20h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="i-printer" viewBox="0 0 24 24">
+      <path d="M7 8V3h10v5M7 17H5a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2M7 14h10v7H7z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="i-device" viewBox="0 0 24 24">
+      <rect x="7" y="2.5" width="10" height="19" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M10 5h4M11 18.5h2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="i-star" viewBox="0 0 24 24">
+      <path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-2.9-5.6 2.9 1.1-6.2L3 9.6l6.2-.9L12 3Z" stroke-width="1.2" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="i-crown" viewBox="0 0 24 24">
+      <path d="m4 7 4 4 4-6 4 6 4-4-2 11H6L4 7Z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/>
+      <path d="M6 21h12" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24">
+      <rect x="8" y="8" width="11" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="1.9"/>
+      <path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2" fill="none" stroke="currentColor" stroke-width="1.9"/>
+    </symbol>
+    <symbol id="i-close" viewBox="0 0 24 24">
+      <path d="m6 6 12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    </symbol>
+  </svg>
+
+  <aside class="fixed-offer" aria-label="Oferta fija">
+    <div class="container fixed-offer__inner">
+      <strong>Esta oferta solo está garantizada ahora</strong>
+      <a class="button" href="#pacotes">Comprar ahora</a>
+    </div>
+  </aside>
+
+  <div class="page-progress" aria-hidden="true">
+    <span class="page-progress__bar" id="pageProgressBar"></span>
+  </div>
+
+  <main>
+    <section class="section hero" id="inicio">
+      <div class="container">
+        <p class="eyebrow">
+          <svg aria-hidden="true"><use href="#i-book"></use></svg>
+          Atlas de las Escrituras
+        </p>
+        <h1>Atlas de las Escrituras: 150 páginas para entender la Biblia</h1>
+        <p class="hero-subtitle">Mapas, resúmenes y líneas del tiempo en un solo PDF</p>
+        <p class="hero-copy">Recibe el material ahora, organiza libros, personajes y acontecimientos y estudia con claridad en tu celular o en papel.</p>
+
+        <div class="hero-grid">
+          <div class="carousel" aria-label="Carrusel del producto">
+            <div class="carousel-viewport">
+              <div class="carousel-track" id="carouselTrack">
+                <article class="carousel-slide" aria-label="1 de 8">
+                  <img src="assets/atlas-capa-es.png" alt="Portada del Atlas de las Escrituras" loading="eager">
+                  <div class="carousel-caption">Portada del Atlas de las Escrituras</div>
+                </article>
+
+                <article class="carousel-slide" aria-label="2 de 8">
+                  <img src="assets/atlas-demo-01-es.png" alt="Mapas y ubicaciones bíblicas" loading="lazy">
+                  <div class="carousel-caption">Mapas y ubicaciones bíblicas</div>
+                </article>
+
+                <article class="carousel-slide" aria-label="3 de 8">
+                  <img src="assets/atlas-demo-02-es.png" alt="Líneas del tiempo de los acontecimientos" loading="lazy">
+                  <div class="carousel-caption">Líneas del tiempo de los acontecimientos</div>
+                </article>
+
+                <article class="carousel-slide" aria-label="4 de 8">
+                  <img src="assets/atlas-demo-03-es.png" alt="Resúmenes visuales de los libros" loading="lazy">
+                  <div class="carousel-caption">Resúmenes visuales de los libros</div>
+                </article>
+
+                <article class="carousel-slide" aria-label="5 de 8">
+                  <img src="assets/atlas-demo-04-es.png" alt="Personajes y conexiones principales" loading="lazy">
+                  <div class="carousel-caption">Personajes y conexiones principales</div>
+                </article>
+
+                <article class="carousel-slide" aria-label="6 de 8">
+                  <img src="assets/atlas-demo-05-es.png" alt="Contextos históricos simplificados" loading="lazy">
+                  <div class="carousel-caption">Contextos históricos simplificados</div>
+                </article>
+
+                <article class="carousel-slide" aria-label="7 de 8">
+                  <img src="assets/atlas-demo-06-es.png" alt="Cuadros de repaso rápido" loading="lazy">
+                  <div class="carousel-caption">Cuadros de repaso rápido</div>
+                </article>
+
+                <article class="carousel-slide" aria-label="8 de 8">
+                  <img src="assets/atlas-demo-07-es.png" alt="Páginas listas para imprimir" loading="lazy">
+                  <div class="carousel-caption">Páginas listas para imprimir</div>
+                </article>
+              </div>
+
+              <div class="carousel-controls">
+                <button class="carousel-control" id="carouselPrev" type="button" aria-label="Página anterior">
+                  <svg aria-hidden="true"><use href="#i-arrow-left"></use></svg>
+                </button>
+                <button class="carousel-control" id="carouselNext" type="button" aria-label="Página siguiente">
+                  <svg aria-hidden="true"><use href="#i-arrow-right"></use></svg>
+                </button>
+              </div>
+            </div>
+
+            <div class="carousel-footer">
+              <div class="carousel-dots" id="carouselDots" aria-label="Elegir página"></div>
+              <p class="carousel-counter" aria-live="polite">
+                Página <span id="carouselCurrent">1</span> de <span id="carouselTotal">8</span>
+              </p>
+            </div>
+
+            <div class="hero-badges" aria-label="Beneficios de la compra">
+              <span class="hero-badge">
+                <svg aria-hidden="true"><use href="#i-download"></use></svg>
+                <span>Acceso inmediato</span>
+              </span>
+              <span class="hero-badge">
+                <svg aria-hidden="true"><use href="#i-check"></use></svg>
+                <span>Pago único</span>
+              </span>
+              <span class="hero-badge">
+                <svg aria-hidden="true"><use href="#i-shield"></use></svg>
+                <span>Compra 100% segura</span>
+              </span>
+              <span class="hero-badge">
+                <svg aria-hidden="true"><use href="#i-clock"></use></svg>
+                <span>Garantía de 30 días</span>
+              </span>
+            </div>
+          </div>
+
+          <div class="hero-offer">
+            <p class="offer-kicker">Hoy por solo</p>
+            <p class="hero-price">$3,90</p>
+            <p class="hero-payment">Pago único y acceso digital inmediato</p>
+            <a class="button button--wide" href="#pacotes">
+              <svg aria-hidden="true"><use href="#i-download"></use></svg>
+              Obtener mi acceso
+            </a>
+            <div class="trust-mini" aria-label="Características del acceso">
+              <span title="Material digital"><svg aria-hidden="true"><use href="#i-device"></use></svg></span>
+              <span title="Listo para imprimir"><svg aria-hidden="true"><use href="#i-printer"></use></svg></span>
+              <span title="Garantía"><svg aria-hidden="true"><use href="#i-shield"></use></svg></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="diferenciais">
+      <div class="container">
+        <h2 class="dopamine-reveal">El poder está en la visión completa de la historia bíblica</h2>
+        <hr class="section-rule dopamine-reveal">
+
+        <div class="feature-grid">
+          <article class="feature-card dopamine-reveal">
+            <div class="icon-box"><svg aria-hidden="true"><use href="#i-map"></use></svg></div>
+            <h3>De lo básico al contexto bíblico completo</h3>
+            <p>Sigue una estructura visual y organizada para entender libros, acontecimientos, lugares y personajes sin depender de búsquedas complicadas.</p>
+          </article>
+
+          <article class="feature-card dopamine-reveal">
+            <div class="icon-box"><svg aria-hidden="true"><use href="#i-clock"></use></svg></div>
+            <h3>Menos búsquedas, más comprensión</h3>
+            <p>Ahorra horas buscando información dispersa. Encuentra mapas, resúmenes y líneas del tiempo organizados en un solo material.</p>
+          </article>
+
+          <article class="feature-card dopamine-reveal">
+            <div class="icon-box"><svg aria-hidden="true"><use href="#i-family"></use></svg></div>
+            <h3>Hecho para aprender y también enseñar</h3>
+            <p>Ideal para principiantes, familias, líderes de grupos, maestros de escuela dominical, predicadores y cristianos que desean estudiar con mayor claridad.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--dark" id="conteudo">
+      <div class="container">
+        <h2 class="dopamine-reveal">Lo que entenderás con mayor claridad</h2>
+        <hr class="section-rule dopamine-reveal">
+
+        <div class="content-grid dopamine-reveal">
+          <div>
+            <ul class="benefit-list">
+              <li><svg aria-hidden="true"><use href="#i-check"></use></svg><span>Orden de los libros y acontecimientos</span></li>
+              <li><svg aria-hidden="true"><use href="#i-check"></use></svg><span>Mapas y lugares de la narrativa bíblica</span></li>
+              <li><svg aria-hidden="true"><use href="#i-check"></use></svg><span>Personajes y conexiones principales</span></li>
+              <li><svg aria-hidden="true"><use href="#i-check"></use></svg><span>Contexto histórico de cada período</span></li>
+              <li><svg aria-hidden="true"><use href="#i-check"></use></svg><span>Líneas del tiempo y secuencia de los hechos</span></li>
+              <li><svg aria-hidden="true"><use href="#i-check"></use></svg><span>Aplicaciones para el estudio y el devocional</span></li>
+            </ul>
+            <a class="button button--gold content-cta" href="#receber">
+              <svg aria-hidden="true"><use href="#i-book"></use></svg>
+              Quiero conocer todo el material
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="receber">
+      <div class="container">
+        <h2 class="dopamine-reveal">¿Qué vas a recibir?</h2>
+        <hr class="section-rule dopamine-reveal">
+
+        <article class="product-showcase dopamine-reveal">
+          <div class="mockup-4x3" aria-hidden="true">
+              <img src="assets/mockup-principal-es.png" alt="" loading="lazy">
+            </div>
+
+          <div class="product-copy">
+            <h3>Atlas de las Escrituras — Mapa Didáctico de la Biblia</h3>
+            <p>150 páginas visuales organizadas para que comprendas la Biblia, repases contenidos y prepares estudios con mayor rapidez.</p>
+
+            <ul class="product-list">
+              <li><svg aria-hidden="true"><use href="#i-check"></use></svg><span>150 páginas visuales del Atlas principal</span></li>
+              <li><svg aria-hidden="true"><use href="#i-check"></use></svg><span>Mapas mentales de libros y temas bíblicos</span></li>
+              <li><svg aria-hidden="true"><use href="#i-check"></use></svg><span>Líneas del tiempo para ubicar acontecimientos</span></li>
+              <li><svg aria-hidden="true"><use href="#i-check"></use></svg><span>Resúmenes de personajes y sus conexiones</span></li>
+              <li><svg aria-hidden="true"><use href="#i-check"></use></svg><span>Contextos históricos y geográficos simplificados</span></li>
+              <li><svg aria-hidden="true"><use href="#i-check"></use></svg><span>Cuadros visuales para repasar rápidamente</span></li>
+              <li><svg aria-hidden="true"><use href="#i-check"></use></svg><span>Páginas de lectura sencilla y aplicación práctica</span></li>
+              <li><svg aria-hidden="true"><use href="#i-check"></use></svg><span>Organización por libros, períodos y temas</span></li>
+              <li><svg aria-hidden="true"><use href="#i-check"></use></svg><span>Material digital listo para descargar</span></li>
+              <li><svg aria-hidden="true"><use href="#i-check"></use></svg><span>Páginas preparadas para imprimir</span></li>
+              <li><svg aria-hidden="true"><use href="#i-check"></use></svg><span>Uso en celular, tableta o computadora</span></li>
+              <li><svg aria-hidden="true"><use href="#i-check"></use></svg><span>Aplicación en familia, grupos, escuela dominical y devocionales</span></li>
+            </ul>
+
+            <p class="value-line">Valorado en $47,00 — Hoy por solo $3,90</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section section--dark" id="bonus">
+      <div class="container">
+        <h2 class="title-with-icon dopamine-reveal">
+          <svg aria-hidden="true"><use href="#i-gift"></use></svg>
+          <span>BONOS EXCLUSIVOS</span>
+        </h2>
+        <div class="bonus-intro dopamine-reveal">
+          <svg aria-hidden="true"><use href="#i-gift"></use></svg>
+          <p>Al adquirir hoy el Paquete Completo, recibes estos 3 bonos exclusivos.</p>
+        </div>
+
+        <div class="bonus-grid">
+          <article class="bonus-card bonus-card-lock dopamine-reveal" data-bonus-lock-card data-unlock-at="0.55">
+            <div
+              class="bonus-unlock"
+              data-bonus-lock
+              role="img"
+              aria-label="Bono bloqueado">
+              <svg class="bonus-unlock__ring" viewBox="0 0 44 44" aria-hidden="true">
+                <circle class="bonus-unlock__progress" cx="22" cy="22" r="18"></circle>
+              </svg>
+              <span class="bonus-unlock__icon bonus-unlock__closed" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect>
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                </svg>
+              </span>
+              <span class="bonus-unlock__icon bonus-unlock__opened" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect>
+                  <path d="M7 11V7a5 5 0 0 1 9.9-1"></path>
+                </svg>
+              </span>
+            </div>
+
+            <div class="mockup-4x3" aria-hidden="true">
+              <img src="assets/bonus-plano-cronologico-es.png" alt="" loading="lazy">
+            </div>
+            <div class="bonus-card__copy">
+              <h3>Plan Cronológico de Lectura Bíblica</h3>
+              <p>1 lista de lectura para seguir el orden de los acontecimientos, crear constancia y saber exactamente por dónde continuar.</p>
+              <p class="value-line">Valorado en $9,90 — Hoy gratis</p>
+            </div>
+          </article>
+
+          <article class="bonus-card bonus-card-lock dopamine-reveal" data-bonus-lock-card data-unlock-at="0.55">
+            <div
+              class="bonus-unlock"
+              data-bonus-lock
+              role="img"
+              aria-label="Bono bloqueado">
+              <svg class="bonus-unlock__ring" viewBox="0 0 44 44" aria-hidden="true">
+                <circle class="bonus-unlock__progress" cx="22" cy="22" r="18"></circle>
+              </svg>
+              <span class="bonus-unlock__icon bonus-unlock__closed" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect>
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                </svg>
+              </span>
+              <span class="bonus-unlock__icon bonus-unlock__opened" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect>
+                  <path d="M7 11V7a5 5 0 0 1 9.9-1"></path>
+                </svg>
+              </span>
+            </div>
+
+            <div class="mockup-4x3" aria-hidden="true">
+              <img src="assets/bonus-personagens-es.png" alt="" loading="lazy">
+            </div>
+            <div class="bonus-card__copy">
+              <h3>Guía Visual de Personajes Bíblicos</h3>
+              <p>1 mapa de consulta para identificar las funciones, las relaciones y la importancia de los personajes dentro de la narrativa bíblica.</p>
+              <p class="value-line">Valorado en $9,90 — Hoy gratis</p>
+            </div>
+          </article>
+
+          <article class="bonus-card bonus-card-lock dopamine-reveal" data-bonus-lock-card data-unlock-at="0.55">
+            <div
+              class="bonus-unlock"
+              data-bonus-lock
+              role="img"
+              aria-label="Bono bloqueado">
+              <svg class="bonus-unlock__ring" viewBox="0 0 44 44" aria-hidden="true">
+                <circle class="bonus-unlock__progress" cx="22" cy="22" r="18"></circle>
+              </svg>
+              <span class="bonus-unlock__icon bonus-unlock__closed" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect>
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                </svg>
+              </span>
+              <span class="bonus-unlock__icon bonus-unlock__opened" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect>
+                  <path d="M7 11V7a5 5 0 0 1 9.9-1"></path>
+                </svg>
+              </span>
+            </div>
+
+            <div class="mockup-4x3" aria-hidden="true">
+              <img src="assets/bonus-aplicacao-es.png" alt="" loading="lazy">
+            </div>
+            <div class="bonus-card__copy">
+              <h3>Guía Práctica de Aplicación Devocional</h3>
+              <p>1 guía con preguntas y fichas para transformar la lectura bíblica en reflexión, aprendizaje y práctica diaria.</p>
+              <p class="value-line">Valorado en $9,90 — Hoy gratis</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="identificacao">
+      <div class="container">
+        <h2 class="dopamine-reveal">Este Atlas de las Escrituras es para ti:</h2>
+        <hr class="section-rule dopamine-reveal">
+
+        <div class="audience-grid dopamine-reveal">
+          <div>
+            <ul class="audience-list">
+              <li><svg aria-hidden="true"><use href="#i-check"></use></svg><span>Empiezas a estudiar, pero te pierdes en el contexto</span></li>
+              <li><svg aria-hidden="true"><use href="#i-check"></use></svg><span>Quieres entender el orden de los hechos sin pasar horas buscando</span></li>
+              <li><svg aria-hidden="true"><use href="#i-check"></use></svg><span>Prefieres aprender con mapas, resúmenes y esquemas</span></li>
+              <li><svg aria-hidden="true"><use href="#i-check"></use></svg><span>Deseas preparar reuniones de grupo y clases con mayor rapidez</span></li>
+              <li><svg aria-hidden="true"><use href="#i-check"></use></svg><span>Quieres involucrar a tu familia en estudios más claros</span></li>
+              <li><svg aria-hidden="true"><use href="#i-check"></use></svg><span>Necesitas un material bonito, sencillo e imprimible</span></li>
+            </ul>
+
+            <a class="button content-cta" href="#pacotes">
+              <svg aria-hidden="true"><use href="#i-book"></use></svg>
+              Quiero estudiar la Biblia con mayor claridad
+            </a>
+          </div>
+        </div>
+
+        <div class="testimonials">
+          <h2 class="dopamine-reveal">Testimonios de quienes ya usan el Atlas de las Escrituras</h2>
+          <div class="testimonial-grid">
+            <article class="testimonial dopamine-reveal">
+              <div class="stars" aria-label="5 de 5 estrellas">
+                <svg aria-hidden="true"><use href="#i-star"></use></svg><svg aria-hidden="true"><use href="#i-star"></use></svg><svg aria-hidden="true"><use href="#i-star"></use></svg><svg aria-hidden="true"><use href="#i-star"></use></svg><svg aria-hidden="true"><use href="#i-star"></use></svg>
+              </div>
+              <blockquote>“Siempre me perdía en el orden de los acontecimientos. Con los mapas, se volvió mucho más fácil estudiar y explicarles a mis hijos.”</blockquote>
+              <cite>— Ana C., estudio bíblico en familia</cite>
+            </article>
+
+            <article class="testimonial dopamine-reveal">
+              <div class="stars" aria-label="5 de 5 estrellas">
+                <svg aria-hidden="true"><use href="#i-star"></use></svg><svg aria-hidden="true"><use href="#i-star"></use></svg><svg aria-hidden="true"><use href="#i-star"></use></svg><svg aria-hidden="true"><use href="#i-star"></use></svg><svg aria-hidden="true"><use href="#i-star"></use></svg>
+              </div>
+              <blockquote>“Lo compré por el precio bajo y me sorprendió. Ya usé varias páginas para preparar encuentros sin tener que empezar todo desde cero.”</blockquote>
+              <cite>— Marcos L., líder de grupo</cite>
+            </article>
+
+            <article class="testimonial dopamine-reveal">
+              <div class="stars" aria-label="5 de 5 estrellas">
+                <svg aria-hidden="true"><use href="#i-star"></use></svg><svg aria-hidden="true"><use href="#i-star"></use></svg><svg aria-hidden="true"><use href="#i-star"></use></svg><svg aria-hidden="true"><use href="#i-star"></use></svg><svg aria-hidden="true"><use href="#i-star"></use></svg>
+              </div>
+              <blockquote>“Me gustó porque no es un montón de texto complicado. El contenido es visual, directo y realmente dan ganas de seguir estudiando.”</blockquote>
+              <cite>— Renata M., devocional personal</cite>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--red" id="pacotes">
+      <div class="container">
+        <div class="offer-heading dopamine-reveal">
+          <h2 class="dopamine-reveal">¿Cuánto vale estudiar la Biblia con claridad y constancia?</h2>
+          <p class="lead">El Atlas principal se presentó por $47,00. Hoy puedes empezar por $3,90 o acceder a la experiencia completa con los 3 bonos.</p>
+        </div>
+
+        <div class="pricing-grid">
+          <article class="price-card price-card--featured dopamine-reveal" id="pacote-completo">
+            <div class="price-card__tag">
+              <svg aria-hidden="true"><use href="#i-crown"></use></svg>
+              EL MÁS ELEGIDO
+            </div>
+
+            <div class="mockup-4x3" aria-hidden="true" style="margin-bottom: 26px;">
+              <img src="assets/mockup-completo-es.png" alt="" loading="lazy">
+            </div>
+
+            <h3>PAQUETE COMPLETO</h3>
+            <p class="price-card__subtitle">Para estudiar, repasar, enseñar y aplicar</p>
+            <p class="price-card__price">$13,90</p>
+            <p class="price-card__payment">Pago único y acceso inmediato</p>
+
+            <ul class="package-list">
+              <li><svg aria-hidden="true"><use href="#i-check"></use></svg><span>Atlas de las Escrituras principal</span></li>
+              <li><svg aria-hidden="true"><use href="#i-check"></use></svg><span>150 páginas visuales en PDF</span></li>
+              <li><svg aria-hidden="true"><use href="#i-check"></use></svg><span>Acceso digital inmediato</span></li>
+              <li><svg aria-hidden="true"><use href="#i-check"></use></svg><span>Plan Cronológico de Lectura Bíblica</span></li>
+              <li><svg aria-hidden="true"><use href="#i-check"></use></svg><span>Guía Visual de Personajes Bíblicos</span></li>
+              <li><svg aria-hidden="true"><use href="#i-check"></use></svg><span>Guía Práctica de Aplicación Devocional</span></li>
+            </ul>
+
+            <a class="button button--wide" href="https://atlas-das-escrituras-premium.metodogo.com/go/checkout?lz_funnel=57&checkout=J9V79SDG2HSEBMQG">
+              Quiero el Paquete Completo por $13,90
+            </a>
+          </article>
+
+          <article class="price-card dopamine-reveal" id="pacote-basico">
+            <h3>PAQUETE BÁSICO</h3>
+            <p class="price-card__subtitle">Para quienes desean solo el Atlas principal</p>
+            <p class="price-card__price">$3,90</p>
+            <p class="price-card__payment">Pago único</p>
+
+            <ul class="package-list">
+              <li><svg aria-hidden="true"><use href="#i-check"></use></svg><span>Atlas de las Escrituras principal</span></li>
+              <li><svg aria-hidden="true"><use href="#i-check"></use></svg><span>150 páginas visuales en PDF</span></li>
+              <li><svg aria-hidden="true"><use href="#i-check"></use></svg><span>Acceso digital inmediato</span></li>
+              <li class="locked"><svg aria-hidden="true"><use href="#i-lock"></use></svg><span>Plan Cronológico de Lectura Bíblica</span></li>
+              <li class="locked"><svg aria-hidden="true"><use href="#i-lock"></use></svg><span>Guía Visual de Personajes Bíblicos</span></li>
+              <li class="locked"><svg aria-hidden="true"><use href="#i-lock"></use></svg><span>Guía Práctica de Aplicación Devocional</span></li>
+            </ul>
+
+            <button class="button button--gold button--wide" id="openUpgradeModal" type="button">
+              Quiero solo el Atlas por $3,90
+            </button>
+          </article>
+        </div>
+
+        <div class="guarantee dopamine-reveal">
+          <div class="guarantee__seal">
+            <svg aria-hidden="true"><use href="#i-shield"></use></svg>
+          </div>
+          <div>
+            <h3>GARANTÍA DE 30 DÍAS</h3>
+            <p>Prueba el material durante 30 días. Si no te resulta útil, te devolvemos el 100% del importe pagado.</p>
+            <p>En pocos minutos tendrás mapas, resúmenes y páginas organizadas para estudiar la Biblia con más confianza y sin empezar desde cero.</p>
+          </div>
+          <a class="button button--gold" href="https://atlas-das-escrituras-premium.metodogo.com/go/checkout?lz_funnel=57&checkout=J9V79SDG2HSEBMQG">Quiero recibir mi acceso ahora</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="perguntas">
+      <div class="container">
+        <h2 class="dopamine-reveal">Preguntas frecuentes</h2>
+        <hr class="section-rule dopamine-reveal">
+
+        <div class="faq-list">
+          <div class="faq-item dopamine-reveal">
+            <button
+              class="faq-question"
+              id="faq-question-1"
+              type="button"
+              aria-expanded="false"
+              aria-controls="faq-answer-1">
+              <span>¿El material es físico o digital?</span>
+            </button>
+            <div
+              class="faq-answer"
+              id="faq-answer-1"
+              role="region"
+              aria-labelledby="faq-question-1"
+              aria-hidden="true">
+              <p>Es 100% digital y se entrega al instante.</p>
+            </div>
+          </div>
+
+          <div class="faq-item dopamine-reveal">
+            <button
+              class="faq-question"
+              id="faq-question-2"
+              type="button"
+              aria-expanded="false"
+              aria-controls="faq-answer-2">
+              <span>¿Sirve para quienes están empezando?</span>
+            </button>
+            <div
+              class="faq-answer"
+              id="faq-answer-2"
+              role="region"
+              aria-labelledby="faq-question-2"
+              aria-hidden="true">
+              <p>Sí. El lenguaje es sencillo y visual.</p>
+            </div>
+          </div>
+
+          <div class="faq-item dopamine-reveal">
+            <button
+              class="faq-question"
+              id="faq-question-3"
+              type="button"
+              aria-expanded="false"
+              aria-controls="faq-answer-3">
+              <span>¿Puedo imprimir las páginas?</span>
+            </button>
+            <div
+              class="faq-answer"
+              id="faq-answer-3"
+              role="region"
+              aria-labelledby="faq-question-3"
+              aria-hidden="true">
+              <p>Sí. Imprime solo lo que desees.</p>
+            </div>
+          </div>
+
+          <div class="faq-item dopamine-reveal">
+            <button
+              class="faq-question"
+              id="faq-question-4"
+              type="button"
+              aria-expanded="false"
+              aria-controls="faq-answer-4">
+              <span>¿Puedo usarlo en grupos, en familia o en la escuela dominical?</span>
+            </button>
+            <div
+              class="faq-answer"
+              id="faq-answer-4"
+              role="region"
+              aria-labelledby="faq-question-4"
+              aria-hidden="true">
+              <p>Sí. Puedes usarlo en todos ellos.</p>
+            </div>
+          </div>
+
+          <div class="faq-item dopamine-reveal">
+            <button
+              class="faq-question"
+              id="faq-question-5"
+              type="button"
+              aria-expanded="false"
+              aria-controls="faq-answer-5">
+              <span>¿Cuándo recibiré el acceso?</span>
+            </button>
+            <div
+              class="faq-answer"
+              id="faq-answer-5"
+              role="region"
+              aria-labelledby="faq-question-5"
+              aria-hidden="true">
+              <p>Después de la confirmación del pago.</p>
+            </div>
+          </div>
+
+          <div class="faq-item dopamine-reveal">
+            <button
+              class="faq-question"
+              id="faq-question-6"
+              type="button"
+              aria-expanded="false"
+              aria-controls="faq-answer-6">
+              <span>¿Cuál es la diferencia entre los paquetes?</span>
+            </button>
+            <div
+              class="faq-answer"
+              id="faq-answer-6"
+              role="region"
+              aria-labelledby="faq-question-6"
+              aria-hidden="true">
+              <p>El completo incluye los 3 bonos.</p>
+            </div>
+          </div>
+
+          <div class="faq-item dopamine-reveal">
+            <button
+              class="faq-question"
+              id="faq-question-7"
+              type="button"
+              aria-expanded="false"
+              aria-controls="faq-answer-7">
+              <span>¿Puedo estudiar desde el celular?</span>
+            </button>
+            <div
+              class="faq-answer"
+              id="faq-answer-7"
+              role="region"
+              aria-labelledby="faq-question-7"
+              aria-hidden="true">
+              <p>Sí. El PDF funciona en varios dispositivos.</p>
+            </div>
+          </div>
+
+          <div class="faq-item dopamine-reveal">
+            <button
+              class="faq-question"
+              id="faq-question-8"
+              type="button"
+              aria-expanded="false"
+              aria-controls="faq-answer-8">
+              <span>¿Hay mensualidades o cobros futuros?</span>
+            </button>
+            <div
+              class="faq-answer"
+              id="faq-answer-8"
+              role="region"
+              aria-labelledby="faq-question-8"
+              aria-hidden="true">
+              <p>No. El pago se realiza una sola vez.</p>
+            </div>
+          </div>
+
+          <div class="faq-item dopamine-reveal">
+            <button
+              class="faq-question"
+              id="faq-question-9"
+              type="button"
+              aria-expanded="false"
+              aria-controls="faq-answer-9">
+              <span>¿El material tiene garantía?</span>
+            </button>
+            <div
+              class="faq-answer"
+              id="faq-answer-9"
+              role="region"
+              aria-labelledby="faq-question-9"
+              aria-hidden="true">
+              <p>Sí. Tienes una garantía de 30 días.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid dopamine-reveal">
+        <div>
+          <h2 class="dopamine-reveal">Atlas de las Escrituras</h2>
+          <p>Material digital, visual e imprimible para comprender la Biblia con mayor claridad, organización y constancia.</p>
+        </div>
+
+        <nav class="footer-nav" aria-label="Navegación del pie de página">
+          <a href="#inicio">Inicio</a>
+          <a href="#conteudo">Contenido</a>
+          <a href="#pacotes">Paquetes</a>
+          <a href="#perguntas">Preguntas frecuentes</a>
+        </nav>
+      </div>
+
+      <div class="footer-bottom dopamine-reveal">
+        <p>Producto digital. No se enviará ningún material físico.</p>
+        <p>© Atlas de las Escrituras. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <dialog
+    class="upgrade-modal"
+    id="upgradeModal"
+    aria-labelledby="upgradeTitle"
+    data-checkout-complete="https://atlas-das-escrituras-premium.metodogo.com/go/checkout?lz_funnel=57&checkout=J9V79SDG2HSEBMQG"
+    data-checkout-basic="https://f-gg5c5zrj8w9zyhj4.metodogo.com/go/checkout?lz_funnel=57&checkout=NL5ARTQ692TC7T72"
+    data-redirect-delay="5000">
+    <div class="modal-inner">
+      <button class="modal-close" id="closeUpgradeModal" type="button" aria-label="Cerrar">
+        <svg aria-hidden="true"><use href="#i-close"></use></svg>
+      </button>
+
+      <div class="modal-icon">
+        <svg aria-hidden="true"><use href="#i-gift"></use></svg>
+      </div>
+
+      <h2 id="upgradeTitle">¡Espera! Obtén los 3 bonos por solo $6 más</h2>
+      <p>Usa el cupón de abajo y llévate el Paquete Completo por $9,90, con acceso al Atlas principal y a los 3 materiales extra.</p>
+
+      <p class="modal-price">De $13,90 a $9,90</p>
+      <div class="coupon">CUPÓN: OFF4HJ</div>
+      <p class="saving">Ahorras $4,00</p>
+
+      <div class="modal-actions">
+        <button class="button button--wide" id="copyCoupon" type="button">
+          <svg aria-hidden="true"><use href="#i-copy"></use></svg>
+          Copiar OFF4HJ y pagar $9,90
+        </button>
+        <button class="text-link" id="continueBasic" type="button">No, quiero continuar con el básico por $3,90</button>
+      </div>
+
+    </div>
+  </dialog>
+
+  <dialog class="upgrade-modal upgrade-modal--confirmation" id="couponConfirmModal" aria-labelledby="couponConfirmTitle">
+    <div class="modal-inner">
+      <div class="modal-icon">
+        <svg aria-hidden="true"><use href="#i-check"></use></svg>
+      </div>
+
+      <h2 id="couponConfirmTitle">¡Cupón copiado correctamente!</h2>
+      <p>Pega el código <b>OFF4HJ</b> en la página de pago para aplicar $4,00 de descuento y llevarte el Paquete Completo por $9,90.</p>
+
+      <div class="modal-actions">
+        <a class="button button--gold button--wide" id="continueComplete" href="https://atlas-das-escrituras-premium.metodogo.com/go/checkout?lz_funnel=57&checkout=J9V79SDG2HSEBMQG">Obtener mi descuento</a>
+      </div>
+    </div>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">¡Cupón copiado correctamente!</div>
+
+  <script>
+    (() => {
+      "use strict";
+
+      /* Checkouts reais configurados nos atributos data-checkout-* do modal. */
+
+      const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+      const hasReducedMotion = () => reducedMotionQuery.matches;
+
+      /* Barra de progresso: começa em 20% e conclui em 100%. */
+      const progressBar = document.getElementById("pageProgressBar");
+      let progressFrame = null;
+
+      const updateProgress = () => {
+        progressFrame = null;
+        if (!progressBar) return;
+
+        const documentHeight = Math.max(
+          document.body.scrollHeight,
+          document.documentElement.scrollHeight
+        );
+        const scrollable = Math.max(1, documentHeight - window.innerHeight);
+        const travelled = Math.min(1, Math.max(0, window.scrollY / scrollable));
+        const progress = 20 + travelled * 80;
+        progressBar.style.width = `${progress.toFixed(2)}%`;
+      };
+
+      const requestProgressUpdate = () => {
+        if (progressFrame !== null) return;
+        progressFrame = window.requestAnimationFrame(updateProgress);
+      };
+
+      window.addEventListener("scroll", requestProgressUpdate, { passive: true });
+      window.addEventListener("resize", requestProgressUpdate);
+      updateProgress();
+
+      /* Carrossel em formato de páginas. O autoplay para definitivamente após interação. */
+      const track = document.getElementById("carouselTrack");
+      const dotsWrap = document.getElementById("carouselDots");
+      const prevButton = document.getElementById("carouselPrev");
+      const nextButton = document.getElementById("carouselNext");
+      const currentCounter = document.getElementById("carouselCurrent");
+      const totalCounter = document.getElementById("carouselTotal");
+      const carousel = track?.closest(".carousel");
+      const viewport = track?.closest(".carousel-viewport");
+      const slides = track ? Array.from(track.children).filter((node) => node.classList.contains("carousel-slide")) : [];
+
+      let currentSlide = 0;
+      let autoTimer = null;
+      let touchStartX = 0;
+      let userInteracted = false;
+
+      const updateCarouselCounter = () => {
+        if (currentCounter) currentCounter.textContent = String(currentSlide + 1);
+        if (totalCounter) totalCounter.textContent = String(slides.length);
+      };
+
+      const renderSlide = (index) => {
+        if (!slides.length) return;
+
+        currentSlide = (index + slides.length) % slides.length;
+
+        slides.forEach((slide, slideIndex) => {
+          slide.classList.toggle("is-flipped", slideIndex < currentSlide);
+          slide.style.zIndex = String(slides.length - slideIndex);
+          slide.setAttribute("aria-hidden", slideIndex === currentSlide ? "false" : "true");
+        });
+
+        if (dotsWrap) {
+          Array.from(dotsWrap.children).forEach((dot, dotIndex) => {
+            dot.setAttribute("aria-current", dotIndex === currentSlide ? "true" : "false");
+          });
+        }
+
+        updateCarouselCounter();
+      };
+
+      const stopAutoPlay = () => {
+        if (!autoTimer) return;
+        window.clearInterval(autoTimer);
+        autoTimer = null;
+      };
+
+      const startAutoPlay = () => {
+        stopAutoPlay();
+        if (hasReducedMotion() || userInteracted || slides.length < 2) return;
+        autoTimer = window.setInterval(() => nextSlide(true), 3100);
+      };
+
+      const markCarouselInteraction = () => {
+        userInteracted = true;
+        stopAutoPlay();
+      };
+
+      const resetToFirstPage = () => {
+        renderSlide(0);
+      };
+
+      const nextSlide = (isAuto = false) => {
+        if (!slides.length) return;
+
+        if (!isAuto) markCarouselInteraction();
+
+        if (currentSlide >= slides.length - 1) {
+          resetToFirstPage();
+          return;
+        }
+
+        renderSlide(currentSlide + 1);
+      };
+
+      const prevSlide = () => {
+        if (!slides.length) return;
+        markCarouselInteraction();
+        if (currentSlide <= 0) {
+          return;
+        }
+        renderSlide(currentSlide - 1);
+      };
+
+      if (slides.length && dotsWrap && prevButton && nextButton) {
+        slides.forEach((slide, index) => {
+          slide.style.zIndex = String(slides.length - index);
+
+          const dot = document.createElement("button");
+          dot.type = "button";
+          dot.className = "carousel-dot";
+          dot.setAttribute("aria-label", `Ir a la página ${index + 1}`);
+          dot.setAttribute("aria-current", index === 0 ? "true" : "false");
+          dot.addEventListener("click", () => {
+            markCarouselInteraction();
+            renderSlide(index);
+          });
+          dotsWrap.appendChild(dot);
+        });
+
+        nextButton.addEventListener("click", () => nextSlide(false));
+        prevButton.addEventListener("click", prevSlide);
+
+        viewport?.addEventListener("mouseenter", stopAutoPlay);
+        viewport?.addEventListener("mouseleave", startAutoPlay);
+        carousel?.addEventListener("focusin", stopAutoPlay);
+        carousel?.addEventListener("focusout", startAutoPlay);
+
+        track.addEventListener("touchstart", (event) => {
+          touchStartX = event.changedTouches[0].clientX;
+          markCarouselInteraction();
+        }, { passive: true });
+
+        track.addEventListener("touchend", (event) => {
+          const delta = event.changedTouches[0].clientX - touchStartX;
+          if (Math.abs(delta) > 42) {
+            delta < 0 ? nextSlide(false) : prevSlide();
+          }
+        }, { passive: true });
+
+        renderSlide(0);
+        startAutoPlay();
+      }
+
+      /* Entradas rápidas ao scroll, com cascata máxima de 135 ms. */
+      const revealItems = Array.from(document.querySelectorAll(".dopamine-reveal"));
+      const cascadeGroups = [
+        ".feature-grid .dopamine-reveal",
+        ".bonus-grid .dopamine-reveal",
+        ".testimonial-grid .dopamine-reveal",
+        ".pricing-grid .dopamine-reveal",
+        ".faq-list .dopamine-reveal"
+      ];
+
+      cascadeGroups.forEach((selector) => {
+        document.querySelectorAll(selector).forEach((item, index) => {
+          item.style.setProperty("--reveal-delay", `${(index % 4) * 45}ms`);
+        });
+      });
+
+      const revealImmediately = () => {
+        revealItems.forEach((item) => {
+          item.classList.remove("dopamine-reveal", "is-visible");
+          item.style.removeProperty("--reveal-delay");
+        });
+      };
+
+      if (hasReducedMotion() || !("IntersectionObserver" in window)) {
+        revealImmediately();
+      } else {
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+
+            const item = entry.target;
+            item.classList.add("is-visible");
+            observer.unobserve(item);
+
+            const delay = Number.parseInt(item.style.getPropertyValue("--reveal-delay"), 10) || 0;
+            window.setTimeout(() => {
+              item.classList.remove("dopamine-reveal", "is-visible");
+              item.style.removeProperty("--reveal-delay");
+            }, 610 + delay);
+          });
+        }, {
+          threshold: 0.06,
+          rootMargin: "0px 0px 14% 0px"
+        });
+
+        revealItems.forEach((item) => revealObserver.observe(item));
+      }
+
+      /* Brilho controlado e feedback duplo apenas enquanto o botão está visível. */
+      const dopamineButtons = Array.from(document.querySelectorAll(
+        ".fixed-offer .button, .hero-offer .button, .content-cta, .price-card .button, .guarantee .button, .modal-actions .button"
+      ));
+
+      dopamineButtons.forEach((button) => button.classList.add("dopamine-button"));
+
+      if (!hasReducedMotion() && "IntersectionObserver" in window) {
+        const buttonObserver = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            const button = entry.target;
+            button.classList.toggle("is-shine-active", entry.isIntersecting);
+
+            if (entry.isIntersecting && button.dataset.rewarded !== "true") {
+              button.dataset.rewarded = "true";
+              button.classList.add("is-button-rewarded");
+              button.addEventListener("animationend", (event) => {
+                if (event.animationName === "buttonReward") {
+                  button.classList.remove("is-button-rewarded");
+                }
+              }, { once: true });
+            }
+          });
+        }, { threshold: 0.28 });
+
+        dopamineButtons.forEach((button) => buttonObserver.observe(button));
+      }
+
+      /* Cadeados dos bônus: o anel acompanha a visibilidade e destrava no ponto configurado. */
+      const bonusCards = Array.from(document.querySelectorAll("[data-bonus-lock-card]"));
+
+      const updateBonusLock = (card, progress = 1) => {
+        const lock = card.querySelector("[data-bonus-lock]");
+        const circle = card.querySelector(".bonus-unlock__progress");
+        if (!lock || !circle) return;
+
+        const radius = circle.r.baseVal.value;
+        const circumference = radius * 2 * Math.PI;
+        const normalized = Math.max(0, Math.min(progress, 1));
+
+        circle.style.strokeDasharray = `${circumference} ${circumference}`;
+        circle.style.strokeDashoffset = String(circumference - normalized * circumference);
+
+        const unlocked = normalized >= 1;
+        lock.classList.toggle("is-unlocked", unlocked);
+        lock.setAttribute("aria-label", unlocked ? "Bono desbloqueado" : "Bono bloqueado");
+      };
+
+      bonusCards.forEach((card) => updateBonusLock(card, 0));
+
+      if (bonusCards.length) {
+        if (hasReducedMotion() || !("IntersectionObserver" in window)) {
+          bonusCards.forEach((card) => updateBonusLock(card, 1));
+        } else {
+          const lockThresholds = Array.from({ length: 41 }, (_, index) => index / 40);
+          const bonusObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+              const configured = Number.parseFloat(entry.target.dataset.unlockAt || "0.55");
+              const unlockAt = Number.isFinite(configured)
+                ? Math.max(0.05, Math.min(configured, 1))
+                : 0.55;
+
+              updateBonusLock(entry.target, entry.intersectionRatio / unlockAt);
+            });
+          }, { threshold: lockThresholds });
+
+          bonusCards.forEach((card) => bonusObserver.observe(card));
+        }
+      }
+
+      /* Estrelas: animação própria somente quando mais da metade do card está realmente visível. */
+      const testimonials = Array.from(document.querySelectorAll(".testimonial"));
+
+      if (testimonials.length) {
+        if (hasReducedMotion() || !("IntersectionObserver" in window)) {
+          testimonials.forEach((card) => card.classList.add("is-stars-visible"));
+        } else {
+          const starsObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting && entry.intersectionRatio >= 0.52) {
+                entry.target.classList.remove("is-stars-visible");
+                void entry.target.offsetWidth;
+                entry.target.classList.add("is-stars-visible");
+              } else {
+                entry.target.classList.remove("is-stars-visible");
+              }
+            });
+          }, {
+            threshold: [0, 0.52, 1],
+            rootMargin: "-18% 0px -18% 0px"
+          });
+
+          testimonials.forEach((card) => starsObserver.observe(card));
+        }
+      }
+
+      /* FAQ com botão, aria-expanded e abertura suave. */
+      const faqItems = Array.from(document.querySelectorAll(".faq-item"));
+
+      const setFaqState = (item, open) => {
+        const button = item.querySelector(".faq-question");
+        const answer = item.querySelector(".faq-answer");
+        if (!button || !answer) return;
+
+        button.setAttribute("aria-expanded", open ? "true" : "false");
+        answer.setAttribute("aria-hidden", open ? "false" : "true");
+        item.classList.toggle("is-open", open);
+
+        if (open) {
+          answer.style.maxHeight = `${answer.scrollHeight}px`;
+        } else {
+          answer.style.maxHeight = "0px";
+        }
+      };
+
+      faqItems.forEach((item) => {
+        const button = item.querySelector(".faq-question");
+        if (!button) return;
+
+        setFaqState(item, false);
+        button.addEventListener("click", () => {
+          const open = button.getAttribute("aria-expanded") === "true";
+          setFaqState(item, !open);
+        });
+      });
+
+      window.addEventListener("resize", () => {
+        faqItems.forEach((item) => {
+          const button = item.querySelector(".faq-question");
+          const answer = item.querySelector(".faq-answer");
+          if (button?.getAttribute("aria-expanded") === "true" && answer) {
+            answer.style.maxHeight = `${answer.scrollHeight}px`;
+          }
+        });
+      });
+
+      /* Modal do plano básico: oferta, confirmação e redirecionamento após 5 segundos. */
+      const offerModal = document.getElementById("upgradeModal");
+      const confirmModal = document.getElementById("couponConfirmModal");
+      const openModalButton = document.getElementById("openUpgradeModal");
+      const closeModalButton = document.getElementById("closeUpgradeModal");
+      const continueBasicButton = document.getElementById("continueBasic");
+      const copyButton = document.getElementById("copyCoupon");
+      const continueComplete = document.getElementById("continueComplete");
+      const toast = document.getElementById("toast");
+
+      let toastTimer = null;
+      let redirectTimer = null;
+
+      const completeDestination = offerModal?.dataset.checkoutComplete || "#pacote-completo";
+      const basicDestination = offerModal?.dataset.checkoutBasic || "#pacote-basico";
+      const redirectDelay = Number(offerModal?.dataset.redirectDelay || 5000);
+
+      if (continueComplete) continueComplete.setAttribute("href", completeDestination);
+
+      const openDialog = (dialog) => {
+        if (!dialog || typeof dialog.showModal !== "function" || dialog.open) return;
+        dialog.showModal();
+        document.body.classList.add("modal-open");
+      };
+
+      const closeDialog = (dialog) => {
+        if (dialog?.open) dialog.close();
+        if (!offerModal?.open && !confirmModal?.open) {
+          document.body.classList.remove("modal-open");
+        }
+      };
+
+      const navigateTo = (destination) => {
+        if (!destination) return;
+
+        closeDialog(confirmModal);
+
+        if (destination.startsWith("#")) {
+          document.querySelector(destination)?.scrollIntoView({
+            behavior: hasReducedMotion() ? "auto" : "smooth",
+            block: "center"
+          });
+          return;
+        }
+
+        window.location.href = destination;
+      };
+
+      const clearRedirect = () => {
+        if (!redirectTimer) return;
+        window.clearTimeout(redirectTimer);
+        redirectTimer = null;
+      };
+
+      const startRedirect = () => {
+        clearRedirect();
+        redirectTimer = window.setTimeout(() => navigateTo(completeDestination), redirectDelay);
+      };
+
+      const showToast = () => {
+        if (!toast) return;
+        toast.classList.add("is-visible");
+        if (toastTimer) window.clearTimeout(toastTimer);
+        toastTimer = window.setTimeout(() => toast.classList.remove("is-visible"), 2200);
+      };
+
+      const copyFallback = (text) => {
+        const area = document.createElement("textarea");
+        area.value = text;
+        area.setAttribute("readonly", "");
+        area.style.position = "fixed";
+        area.style.left = "-9999px";
+        area.style.opacity = "0";
+        document.body.appendChild(area);
+        area.select();
+
+        try {
+          document.execCommand("copy");
+        } catch {
+          /* O fluxo continua mesmo quando o navegador bloqueia o clipboard. */
+        }
+
+        area.remove();
+      };
+
+      const showCouponConfirmation = () => {
+        closeDialog(offerModal);
+        openDialog(confirmModal);
+        showToast();
+        startRedirect();
+      };
+
+      openModalButton?.addEventListener("click", () => openDialog(offerModal));
+      closeModalButton?.addEventListener("click", () => closeDialog(offerModal));
+
+      continueBasicButton?.addEventListener("click", () => {
+        clearRedirect();
+        closeDialog(offerModal);
+        navigateTo(basicDestination);
+      });
+
+      copyButton?.addEventListener("click", async () => {
+        try {
+          if (navigator.clipboard?.writeText && window.isSecureContext) {
+            await navigator.clipboard.writeText("OFF4HJ");
+          } else {
+            copyFallback("OFF4HJ");
+          }
+        } catch {
+          copyFallback("OFF4HJ");
+        }
+
+        showCouponConfirmation();
+      });
+
+      continueComplete?.addEventListener("click", (event) => {
+        event.preventDefault();
+        clearRedirect();
+        navigateTo(completeDestination);
+      });
+
+      offerModal?.addEventListener("click", (event) => {
+        const rect = offerModal.getBoundingClientRect();
+        const clickedBackdrop =
+          event.clientX < rect.left ||
+          event.clientX > rect.right ||
+          event.clientY < rect.top ||
+          event.clientY > rect.bottom;
+
+        if (clickedBackdrop) closeDialog(offerModal);
+      });
+
+      offerModal?.addEventListener("close", () => {
+        if (!confirmModal?.open) document.body.classList.remove("modal-open");
+      });
+
+      confirmModal?.addEventListener("cancel", (event) => event.preventDefault());
+      confirmModal?.addEventListener("close", () => {
+        clearRedirect();
+        if (!offerModal?.open) document.body.classList.remove("modal-open");
+      });
+    })();
+  </script>
+<style id="lowzingo-whatsapp-final-section-style">.lowzingo-whatsapp-final-section{box-sizing:border-box;width:100%;padding:34px 18px;background:#f8fafc;color:#0f172a;font-family:inherit}.lowzingo-whatsapp-final-card{box-sizing:border-box;max-width:980px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:22px;border:1px solid rgba(15,23,42,.1);border-radius:16px;background:#fff;box-shadow:0 18px 44px rgba(15,23,42,.1)}.lowzingo-whatsapp-final-content{display:flex;align-items:center;gap:14px;min-width:0}.lowzingo-whatsapp-final-icon{width:58px;height:58px;min-width:58px;display:flex;align-items:center;justify-content:center;border-radius:999px;background:#27d045;box-shadow:0 12px 28px rgba(39,208,69,.28);overflow:hidden;color:#fff}.lowzingo-whatsapp-final-icon img,.lowzingo-whatsapp-final-icon svg{width:100%;height:100%;display:block;object-fit:contain}.lowzingo-whatsapp-final-icon svg{padding:16%;box-sizing:border-box}.lowzingo-whatsapp-final-copy{display:grid;gap:4px;min-width:0}.lowzingo-whatsapp-final-copy strong{font-size:22px;line-height:1.22;color:#0f172a}.lowzingo-whatsapp-final-action{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 20px;border-radius:999px;background:#27d045;color:#fff;text-decoration:none;font-weight:800;white-space:nowrap;box-shadow:0 12px 28px rgba(39,208,69,.28);transition:transform .18s ease,box-shadow .18s ease}.lowzingo-whatsapp-final-action:hover{transform:translateY(-2px);box-shadow:0 16px 34px rgba(39,208,69,.34)}@media (max-width:720px){.lowzingo-whatsapp-final-card{align-items:stretch;flex-direction:column;padding:18px}.lowzingo-whatsapp-final-content{align-items:flex-start}.lowzingo-whatsapp-final-copy strong{font-size:18px}.lowzingo-whatsapp-final-action{width:100%}}</style><section class="lowzingo-whatsapp-final-section" data-lowzingo-whatsapp-final-section><div class="lowzingo-whatsapp-final-card"><div class="lowzingo-whatsapp-final-content"><span class="lowzingo-whatsapp-final-icon"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill="currentColor" d="M16.02 3.2c-7.02 0-12.72 5.58-12.72 12.46 0 2.35.68 4.64 1.96 6.62L3.2 28.8l6.75-1.98a12.97 12.97 0 0 0 6.07 1.52c7.02 0 12.72-5.59 12.72-12.46S23.04 3.2 16.02 3.2Zm0 22.98c-1.93 0-3.8-.51-5.44-1.48l-.39-.23-4 1.17 1.22-3.86-.25-.4a10.16 10.16 0 0 1-1.65-5.72c0-5.67 4.72-10.29 10.51-10.29s10.51 4.62 10.51 10.29-4.71 10.52-10.51 10.52Zm5.77-7.7c-.32-.15-1.86-.9-2.15-1-.29-.1-.5-.15-.7.15-.21.31-.81 1-.99 1.2-.18.2-.36.22-.67.07-.32-.15-1.34-.48-2.55-1.54-.94-.82-1.58-1.84-1.76-2.15-.18-.31-.02-.48.14-.63.14-.14.32-.36.48-.54.16-.18.21-.31.32-.51.1-.2.05-.39-.03-.54-.08-.15-.7-1.66-.96-2.28-.25-.6-.51-.52-.7-.53h-.6c-.21 0-.55.08-.84.39-.29.31-1.1 1.06-1.1 2.58s1.13 3 1.29 3.2c.16.2 2.22 3.33 5.39 4.67.75.32 1.34.51 1.8.65.76.24 1.45.21 1.99.13.61-.09 1.86-.75 2.13-1.47.26-.72.26-1.34.18-1.47-.08-.13-.29-.21-.61-.36Z"/></svg></span><div class="lowzingo-whatsapp-final-copy"><strong>¿Todavía tienes alguna duda? Contáctanos.</strong></div></div><a class="lowzingo-whatsapp-final-action" href="https://wa.me/5512991498303?text=Hola%2C%20vengo%20de%20la%20p%C3%A1gina%20Atlas%20de%20las%20Escrituras%20y%20tengo%20una%20duda%20sobre%20el%20material." target="_blank" rel="noopener noreferrer" data-lz-track="whatsapp_funnel_button" data-lz-whatsapp-funnel-id="58" data-lz-source-funnel-id="57">Hablar por WhatsApp</a></div></section>
+</body></html>
